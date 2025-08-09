@@ -45,7 +45,18 @@ YOU MUST maintain this exact directory structure:
 │   ├── debug/
 │   └── artifacts/
 ├── examples/          # Reusable code patterns
-└── docs/              # User documentation
+├── docs/              # User documentation
+└── memory-bank/       # Memory persistence (MCP memory-bank server)
+    └── {project-name}/    # Auto-created by MCP server
+        ├── documents/      # MCP document storage
+        ├── embeddings/     # MCP embeddings
+        ├── global/         # MCP global context
+        ├── locks/          # MCP task locks
+        ├── projects/       # MCP project metadata
+        └── search/         # MCP search index
+        
+    Note: The MCP memory-bank server manages its own structure.
+    Agents use MCP tools to store/retrieve context, not direct file access.
 ```
 
 ## File Organization Rules
