@@ -42,12 +42,28 @@ You maintain a hierarchical memory structure under `memory-bank/{project-name}/`
 
 ## Operational Protocols
 
+### Project Initialization (First Contact)
+When first interacting with a project:
+1. Check if memory-bank/{project-name} exists
+2. If not, create the complete directory structure:
+   ```bash
+   mkdir -p memory-bank/{project-name}/agent-context
+   mkdir -p memory-bank/{project-name}/task-locks
+   mkdir -p memory-bank/{project-name}/validation-gates
+   mkdir -p memory-bank/{project-name}/execution-history
+   mkdir -p memory-bank/{project-name}/checkpoints
+   mkdir -p memory-bank/{project-name}/blockers
+   ```
+3. Initialize project metadata file with creation timestamp
+4. Report successful initialization
+
 ### When Starting Any Task
-1. Check for existing locks on the target task
-2. Verify lock validity (expire if >2 hours old)
-3. Retrieve all relevant context from previous agents
-4. Create new lock if proceeding
-5. Provide comprehensive context summary to the requesting agent
+1. Ensure project memory structure exists (run initialization if needed)
+2. Check for existing locks on the target task
+3. Verify lock validity (expire if >2 hours old)
+4. Retrieve all relevant context from previous agents
+5. Create new lock if proceeding
+6. Provide comprehensive context summary to the requesting agent
 
 ### When Storing Context
 You capture and structure:

@@ -131,6 +131,33 @@ Organize tasks under:
 
 Tasks should be atomic (0.5-2 days for MVP). Mark assumption-dependent tasks clearly.
 
+### Phase 2.5 — Directory Structure Creation
+
+**Create required project directories**:
+```bash
+# Create Context Engineering directories
+mkdir -p features
+mkdir -p PRPs
+mkdir -p src
+mkdir -p tests/unit
+mkdir -p tests/integration
+mkdir -p tests/e2e
+mkdir -p reports/debug
+mkdir -p reports/artifacts
+mkdir -p examples
+mkdir -p docs
+
+# Create memory-bank structure (use project name from intake)
+mkdir -p memory-bank/{project-name}/agent-context
+mkdir -p memory-bank/{project-name}/task-locks
+mkdir -p memory-bank/{project-name}/validation-gates
+mkdir -p memory-bank/{project-name}/execution-history
+mkdir -p memory-bank/{project-name}/checkpoints
+mkdir -p memory-bank/{project-name}/blockers
+```
+
+Report directory creation status and any errors.
+
 ### Phase 3 — Validation with Memory Storage
 
 - Confirm both files exist with all sections populated or TODO-tagged
