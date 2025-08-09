@@ -133,20 +133,31 @@ Tasks should be atomic (0.5-2 days for MVP). Mark assumption-dependent tasks cle
 
 ### Phase 2.5 — Directory Structure Creation
 
-**IMPORTANT**: You MUST execute these commands using the Bash tool to create the directories.
+**IMPORTANT**: You MUST execute these commands using the Bash tool to create ALL directories.
 
 **Create required project directories**:
-1. First, create Context Engineering directories:
-   - Execute: `mkdir -p features PRPs src tests/unit tests/integration tests/e2e reports/debug reports/artifacts examples docs`
 
-2. Then, create memory-bank structure (replace {project-name} with actual project name from intake, converted to lowercase with no spaces):
-   - Determine project slug (e.g., "TinyLink API" → "tinylink")
-   - Execute: `mkdir -p memory-bank/{project-slug}/agent-context memory-bank/{project-slug}/task-locks memory-bank/{project-slug}/validation-gates memory-bank/{project-slug}/execution-history memory-bank/{project-slug}/checkpoints memory-bank/{project-slug}/blockers`
+1. Determine project slug from project name (e.g., "TinyLink API" → "tinylink", "My Cool App" → "my-cool-app")
+   - Convert to lowercase
+   - Replace spaces with hyphens
+   - Remove special characters
 
-3. Verify all directories were created:
-   - Execute: `ls -la features PRPs src tests reports examples docs memory-bank/`
+2. Execute a SINGLE command to create ALL directories at once:
+   ```bash
+   mkdir -p features PRPs src tests/unit tests/integration tests/e2e reports/debug reports/artifacts examples docs memory-bank/{project-slug}/{agent-context,task-locks,validation-gates,execution-history,checkpoints,blockers}
+   ```
    
-Report directory creation status and any errors. The memory-bank structure is CRITICAL for agent coordination.
+   For example, if project slug is "tinylink", execute:
+   ```bash
+   mkdir -p features PRPs src tests/unit tests/integration tests/e2e reports/debug reports/artifacts examples docs memory-bank/tinylink/{agent-context,task-locks,validation-gates,execution-history,checkpoints,blockers}
+   ```
+
+3. Verify ALL directories were created, especially memory-bank subdirectories:
+   - Execute: `find . -type d -name "memory-bank" -exec ls -la {} \; 2>/dev/null`
+   - Execute: `ls -la memory-bank/{project-slug}/`
+   - Confirm you see: agent-context, task-locks, validation-gates, execution-history, checkpoints, blockers
+   
+Report directory creation status. The memory-bank subdirectories are CRITICAL - if any are missing, the workflow will fail.
 
 ### Phase 3 — Validation with Memory Storage
 
