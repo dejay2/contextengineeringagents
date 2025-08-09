@@ -44,18 +44,20 @@ You maintain a hierarchical memory structure under `memory-bank/{project-name}/`
 
 ### Project Initialization (First Contact)
 When first interacting with a project:
-1. Check if memory-bank/{project-name} exists
-2. If not, create the complete directory structure:
-   ```bash
-   mkdir -p memory-bank/{project-name}/agent-context
-   mkdir -p memory-bank/{project-name}/task-locks
-   mkdir -p memory-bank/{project-name}/validation-gates
-   mkdir -p memory-bank/{project-name}/execution-history
-   mkdir -p memory-bank/{project-name}/checkpoints
-   mkdir -p memory-bank/{project-name}/blockers
-   ```
-3. Initialize project metadata file with creation timestamp
-4. Report successful initialization
+1. Check if memory-bank project exists using `mcp__alioshr-memory-bank-mcp__list_projects`
+2. If project doesn't exist in memory bank:
+   a. First create local directory structure using Bash tool:
+      - Execute: `mkdir -p memory-bank/{project-slug}/agent-context`
+      - Execute: `mkdir -p memory-bank/{project-slug}/task-locks`  
+      - Execute: `mkdir -p memory-bank/{project-slug}/validation-gates`
+      - Execute: `mkdir -p memory-bank/{project-slug}/execution-history`
+      - Execute: `mkdir -p memory-bank/{project-slug}/checkpoints`
+      - Execute: `mkdir -p memory-bank/{project-slug}/blockers`
+   b. Then create initial memory bank files using MCP tools:
+      - Use `mcp__alioshr-memory-bank-mcp__memory_bank_write` to create project-metadata.json
+      - Include creation timestamp, project name, and initial state
+3. Verify structure with: `ls -la memory-bank/{project-slug}/`
+4. Report successful initialization with directory listing
 
 ### When Starting Any Task
 1. Ensure project memory structure exists (run initialization if needed)

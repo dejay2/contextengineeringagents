@@ -133,30 +133,20 @@ Tasks should be atomic (0.5-2 days for MVP). Mark assumption-dependent tasks cle
 
 ### Phase 2.5 — Directory Structure Creation
 
+**IMPORTANT**: You MUST execute these commands using the Bash tool to create the directories.
+
 **Create required project directories**:
-```bash
-# Create Context Engineering directories
-mkdir -p features
-mkdir -p PRPs
-mkdir -p src
-mkdir -p tests/unit
-mkdir -p tests/integration
-mkdir -p tests/e2e
-mkdir -p reports/debug
-mkdir -p reports/artifacts
-mkdir -p examples
-mkdir -p docs
+1. First, create Context Engineering directories:
+   - Execute: `mkdir -p features PRPs src tests/unit tests/integration tests/e2e reports/debug reports/artifacts examples docs`
 
-# Create memory-bank structure (use project name from intake)
-mkdir -p memory-bank/{project-name}/agent-context
-mkdir -p memory-bank/{project-name}/task-locks
-mkdir -p memory-bank/{project-name}/validation-gates
-mkdir -p memory-bank/{project-name}/execution-history
-mkdir -p memory-bank/{project-name}/checkpoints
-mkdir -p memory-bank/{project-name}/blockers
-```
+2. Then, create memory-bank structure (replace {project-name} with actual project name from intake, converted to lowercase with no spaces):
+   - Determine project slug (e.g., "TinyLink API" → "tinylink")
+   - Execute: `mkdir -p memory-bank/{project-slug}/agent-context memory-bank/{project-slug}/task-locks memory-bank/{project-slug}/validation-gates memory-bank/{project-slug}/execution-history memory-bank/{project-slug}/checkpoints memory-bank/{project-slug}/blockers`
 
-Report directory creation status and any errors.
+3. Verify all directories were created:
+   - Execute: `ls -la features PRPs src tests reports examples docs memory-bank/`
+   
+Report directory creation status and any errors. The memory-bank structure is CRITICAL for agent coordination.
 
 ### Phase 3 — Validation with Memory Storage
 
