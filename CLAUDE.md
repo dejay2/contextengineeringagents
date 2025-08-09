@@ -11,12 +11,26 @@ YOU MUST use the specialized agents in `.claude/agents/` for ALL major tasks:
 5. **Bug Fixes** → Use `debugger` agent for single-pass debugging
 6. **Context & State Management** → Use `memory` agent for inter-agent coordination
 
-### Memory Agent Integration
-The `memory` agent MUST be used:
-- **BEFORE** any agent starts work (check locks, retrieve context)
-- **AFTER** any agent completes work (store context, release locks)
-- **ON ERRORS** to preserve state for recovery
-- **FOR VALIDATION** to track gate results
+### IMPORTANT: How Agents Work
+- Agents are invoked using the Task tool with `subagent_type` parameter
+- Agents CANNOT directly call other agents - they must instruct YOU to do it
+- When an agent completes and says to use another agent, YOU must invoke it
+- The PM agent will tell you to invoke the memory agent - YOU must do this
+
+### Memory Agent Integration Pattern
+When using ANY agent, YOU (not the agent) must:
+1. **BEFORE**: Invoke memory agent to check locks and retrieve context
+2. **DURING**: Let the agent complete its work
+3. **AFTER**: Invoke memory agent to store context and release locks
+
+Example workflow:
+```
+User: "Create a new feature for authentication"
+You: Use Task tool → memory agent (check locks)
+You: Use Task tool → pm agent (add feature to TASK.md)
+[PM agent completes and instructs to store context]
+You: Use Task tool → memory agent (store PM context)
+```
 
 NEVER implement features directly. ALWAYS follow the Context Engineering workflow with memory persistence.
 
