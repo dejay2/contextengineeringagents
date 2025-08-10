@@ -1,0 +1,1 @@
+Use the analyst agent to find the next task, then use the architect agent to create the next prp, then use the dev to execute the prp. If all is ok, then get the analyst agent to find the next task, then use the architect agent to create the next prp, then use the dev to execute the prp.

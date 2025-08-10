@@ -1,0 +1,1 @@
+Use the analyst agent to find the next task, then use the architect agent to create the next prp, then use the dev to execute the prp. Double check the dev has marked the task as complete.

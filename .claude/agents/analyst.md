@@ -17,24 +17,21 @@ Optionally note examples or docs as TODOs if tools are unavailable. Do not creat
 
 - Deterministic, testable output; avoid generic statements
 - Security first: never include secrets, credentials, PII, or tokens
-- Tool usage is optional. If Brave/Playwright/Context tools are not available, add TODOs; do not fail the run
-- Memory integration: Check task locks before starting, store discoveries after completion
+- Tool usage is optional. If Brave/Playwright/Context tools are not available, add TODOs using Todowrite tool; do not fail the run
 
-## File Naming and Selection with Memory
+## File Naming and Selection
 
-1. **Memory Check**: Use memory agent to check for any active locks on tasks
-2. **Memory Retrieve**: Get PM context and any prior analyst discoveries for related features
-3. Read repository-root TASK.md
-4. Parse lines supporting any of these forms (case-insensitive):
+1. Get PM context and any prior analyst discoveries for related features
+2. Read repository-root TASK.md
+3. Parse lines supporting any of these forms (case-insensitive):
    - "1. [ ] Task title"
    - "1) [ ] Task title"
    - "#1 [ ] Task title"
    - "- [ ] (1) Task title"
-5. Completed if the line contains "[x]" (x case-insensitive)
-6. The task number is the first integer on the line
-7. Choose the smallest-numbered task that is unchecked "[ ]" AND not locked
-8. **Memory Lock**: Create a task lock for the selected task
-9. Extract N = that task's number
+4. Completed if the line contains "[x]" (x case-insensitive)
+5. The task number is the first integer on the line
+6. Choose the smallest-numbered task that is unchecked "[ ]" AND not locked
+7. Extract N = that task's number
 
 ## Feature Name Processing
 
@@ -145,22 +142,13 @@ If tooling is unavailable, include TODOs and suggested official sources.
 6. Do not create examples/ unless explicitly requested
 7. Return a concise summary: file path, whether created or updated, selected N, and any fallbacks used
 
-## Execution Sequence with Memory Integration
+## Execution Sequence
 
-1. **Memory Start**: Check for task locks and retrieve PM/prior analyst context
-2. Determine feature name from user input; else infer; else "new-feature"
-3. Read TASK.md at repo root
-4. Parse tasks, find next unchecked "[ ]" entry that is NOT locked, extract N; else infer N as per fallback
-5. **Memory Lock**: Create task lock for selected task N
-6. Slugify the feature name; ensure features/ exists
-7. Create or update features/<N>-<feature-slug>.md with the template and current ISO8601 timestamp
-8. **Memory Store**: Save discoveries, constraints, and technical findings including:
-   - Edge cases discovered
-   - Technical constraints identified
-   - Dependencies on other features
-   - Assumptions made during analysis
-9. Do not create examples/ unless explicitly requested
-10. **Memory Release**: Release task lock and mark analysis complete
+1. Determine feature name from user input; else infer; else "new-feature"
+2. Read TASK.md at repo root
+3. Parse tasks, find next unchecked "[ ]" entry that is NOT locked, extract N; else infer N as per fallback
+4. Slugify the feature name; ensure features/ exists
+5. Create or update features/<N>-<feature-slug>.md with the template and current ISO8601 timestamp
 11. Return a concise summary: file path, whether created or updated, selected N, and any fallbacks used
 
 ## Notes
@@ -172,4 +160,3 @@ If tooling is unavailable, include TODOs and suggested official sources.
 - Always use ISO8601 timestamps (e.g., 2024-01-15T10:30:00Z)
 - Ensure all paths are relative to repository root
 - If updating an existing file, preserve all existing content and only append to UPDATES section
-- Store all discoveries in memory for architect agent to retrieve

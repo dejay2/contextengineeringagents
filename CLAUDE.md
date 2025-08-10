@@ -1,6 +1,6 @@
 # Context Engineering Project Guidelines
 
-## CRITICAL: Agent Workflow with Memory Integration
+## CRITICAL: Agent Workflow
 
 YOU MUST use the specialized agents in `.claude/agents/` for ALL major tasks:
 
@@ -9,30 +9,13 @@ YOU MUST use the specialized agents in `.claude/agents/` for ALL major tasks:
 3. **Requirements Design** → Use `architect` agent to transform features/*.md → PRPs/*.md
 4. **Implementation** → Use `dev` agent to execute PRPs with validation
 5. **Bug Fixes** → Use `debugger` agent for single-pass debugging
-6. **Context & State Management** → Use `memory` agent for inter-agent coordination
+
 
 ### IMPORTANT: How Agents Work
 - Agents are invoked using the Task tool with `subagent_type` parameter
 - Agents CANNOT directly call other agents - they must instruct YOU to do it
 - When an agent completes and says to use another agent, YOU must invoke it
-- The PM agent will tell you to invoke the memory agent - YOU must do this
 
-### Memory Agent Integration Pattern
-When using ANY agent, YOU (not the agent) must:
-1. **BEFORE**: Invoke memory agent to check locks and retrieve context
-2. **DURING**: Let the agent complete its work
-3. **AFTER**: Invoke memory agent to store context and release locks
-
-Example workflow:
-```
-User: "Create a new feature for authentication"
-You: Use Task tool → memory agent (check locks)
-You: Use Task tool → pm agent (add feature to TASK.md)
-[PM agent completes and instructs to store context]
-You: Use Task tool → memory agent (store PM context)
-```
-
-NEVER implement features directly. ALWAYS follow the Context Engineering workflow with memory persistence.
 
 ## Project Structure Requirements
 
@@ -60,18 +43,7 @@ YOU MUST maintain this exact directory structure:
 │   └── artifacts/
 ├── examples/          # Reusable code patterns
 ├── docs/              # User documentation
-└── memory-bank/       # Memory persistence (MCP memory-bank server)
-    └── {project-name}/    # Auto-created by MCP server
-        ├── documents/      # MCP document storage
-        ├── embeddings/     # MCP embeddings
-        ├── global/         # MCP global context
-        ├── locks/          # MCP task locks
-        ├── projects/       # MCP project metadata
-        └── search/         # MCP search index
-        
-    Note: The MCP memory-bank server manages its own structure.
-    Agents use MCP tools to store/retrieve context, not direct file access.
-```
+
 
 ## File Organization Rules
 
@@ -236,17 +208,5 @@ Use dev agent via Task tool
 
 # For fixing bugs
 Use debugger agent via Task tool
-
-# For managing context and locks
-Use memory agent via Task tool
-```
-
-### Common Patterns with Memory Integration
-- Check TASK.md → **Memory: Check locks** → Use appropriate agent → **Memory: Store context** → Validate → Update TASK.md
-- Feature flow: pm → [memory] → analyst → [memory] → architect → [memory] → dev
-- Bug flow: [memory: retrieve all context] → debugger → [memory: store findings]
-- Always preserve existing file content when updating
-- Always check memory for prior context before starting work
-- Always release locks promptly after completing work
 
 This file is the source of truth for project organization. Follow it exactly.

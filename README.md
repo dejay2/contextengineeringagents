@@ -4,26 +4,20 @@ A sophisticated multi-agent development workflow that enforces rigorous requirem
 
 ## 🎯 Overview
 
-This project implements a Context Engineering workflow with memory-integrated agents that work together to transform ideas into production-ready code. The system ensures no context is lost between development phases and maintains complete traceability from requirements to implementation.
+This project implements a Context Engineering workflow with specialized agents that work together to transform ideas into production-ready code. The system maintains complete traceability from requirements to implementation.
 
 ## 🏗️ Architecture
 
 ```mermaid
 graph TD
     Start([User Request]) --> PM[PM Agent]
-    PM -->|Creates TASK.md| Memory1[Memory Agent]
-    Memory1 --> Analyst[Analyst Agent]
-    Analyst -->|Creates features/*.md| Memory2[Memory Agent]
-    Memory2 --> Architect[Architect Agent]
-    Architect -->|Creates PRPs/*.md| Memory3[Memory Agent]
-    Memory3 --> Dev[Dev Agent]
-    Dev -->|Implements Code| Memory4[Memory Agent]
-    Memory4 --> End([Complete])
+    PM -->|Creates TASK.md| Analyst[Analyst Agent]
+    Analyst -->|Creates features/*.md| Architect[Architect Agent]
+    Architect -->|Creates PRPs/*.md| Dev[Dev Agent]
+    Dev -->|Implements Code| End([Complete])
     
-    Bug([Bug Report]) --> MemoryDebug[Memory Agent]
-    MemoryDebug --> Debugger[Debugger Agent]
-    Debugger --> Memory5[Memory Agent]
-    Memory5 --> End
+    Bug([Bug Report]) --> Debugger[Debugger Agent]
+    Debugger --> End
 ```
 
 ## 🤖 Agents
@@ -34,44 +28,31 @@ graph TD
 - Manages task prioritization and dependencies
 - Estimates complexity and timelines
 
-### 2. **Memory Agent** (Context Coordinator)
-- Prevents context loss between agents
-- Manages task locks to prevent race conditions
-- Stores decisions, rationale, and discoveries
-- Creates checkpoints for error recovery
-- Maintains complete audit trail
-
-### 3. **Analyst Agent** (Feature Documentarian)
+### 2. **Analyst Agent** (Feature Documentarian)
 - Transforms tasks into detailed feature specifications
 - Documents edge cases and constraints
 - Identifies technical requirements
 - Creates `features/<N>-<name>.md` documents
 
-### 4. **Architect Agent** (Requirements Engineer)
+### 3. **Architect Agent** (Requirements Engineer)
 - Transforms features into executable Product Requirements Prompts (PRPs)
 - Conducts parallel research using multiple sources
 - Designs implementation approach with rationale
 - Creates validation gates and test cases
 
-### 5. **Dev Agent** (Implementation Executor)
+### 4. **Dev Agent** (Implementation Executor)
 - Executes PRPs with step-by-step validation
 - Runs tests and quality checks at each stage
 - Generates comprehensive execution reports
 - Ensures all validation gates pass
 
-### 6. **Debugger Agent** (Issue Resolver)
+### 5. **Debugger Agent** (Issue Resolver)
 - Single-pass bug diagnosis and fix
 - Leverages full context history for informed debugging
 - Implements minimal, targeted fixes
 - Documents root cause analysis
 
 ## 💡 Key Features
-
-### Memory Persistence
-- **Zero Context Loss**: Every decision, discovery, and rationale is preserved
-- **Task Locking**: Prevents race conditions in parallel development
-- **Checkpoint System**: Enables recovery from any point
-- **Cross-Feature Context**: Shares knowledge between related features
 
 ### Validation Gates
 - **Requirements Completeness**: Ensures all aspects are documented
@@ -80,10 +61,8 @@ graph TD
 - **Performance Benchmarks**: Meets defined SLAs
 
 ### Error Recovery
-- **Automatic Checkpointing**: Before risky operations
 - **Partial Progress Preservation**: Never lose work
 - **Blocker Documentation**: Clear escalation paths
-- **Stale Lock Cleanup**: Automatic after 2 hours
 
 ## 📁 Project Structure
 
@@ -106,19 +85,13 @@ graph TD
 ├── reports/           # Execution reports
 │   ├── prp-execution-*.md
 │   └── debug/
-├── examples/          # Code patterns
-└── memory-bank/       # Persistent memory
-    └── {project}/
-        ├── agent-context/
-        ├── task-locks/
-        └── validation-gates/
+└── examples/          # Code patterns
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 - Claude Code CLI
-- MCP memory-bank server configured
 - Git for version control
 
 ### Basic Workflow
@@ -153,13 +126,6 @@ claude "Implement the task API PRP"
 claude "Fix: TypeError in task creation endpoint"
 ```
 
-## 🔒 Concurrency Management
-
-The Memory Agent prevents race conditions through task locking:
-- Locks are created when agents start work
-- Automatic expiry after 2 hours (configurable)
-- Parallel work on different tasks supported
-- Lock status visible to all agents
 
 ## 📊 Validation & Quality
 
@@ -171,13 +137,6 @@ Each stage has validation gates:
 
 ## 🛠️ Integration
 
-### MCP Memory Bank
-The system integrates with MCP memory-bank server for persistent storage:
-- Stores all agent decisions and context
-- Maintains task locks
-- Tracks validation results
-- Preserves execution history
-
 ### Development Tools
 Compatible with:
 - Any programming language
@@ -188,10 +147,9 @@ Compatible with:
 ## 📈 Benefits
 
 ### For Development Teams
-- **No Context Loss**: Complete history of all decisions
 - **Reduced Bugs**: Validation at every stage
-- **Faster Debugging**: Full context available instantly
-- **Safe Parallelism**: No merge conflicts from concurrent work
+- **Faster Debugging**: Complete context available instantly
+- **Safe Development**: Structured workflow prevents conflicts
 
 ### For Project Management
 - **Complete Traceability**: Requirements to implementation
@@ -208,7 +166,6 @@ Compatible with:
 ## 📚 Documentation
 
 - [Context Engineering Workflow](docs/CONTEXT_ENGINEERING_WORKFLOW.md) - Complete workflow guide
-- [Memory Usage Examples](examples/memory-usage-examples.md) - Practical scenarios
 - [CLAUDE.md](CLAUDE.md) - Project guidelines and rules
 
 ## 🤝 Contributing
@@ -216,8 +173,7 @@ Compatible with:
 This workflow is designed to be extended. To add new agents:
 1. Create agent definition in `.claude/agents/`
 2. Update workflow documentation
-3. Add memory integration points
-4. Define validation gates
+3. Define validation gates
 
 ## 📝 License
 
@@ -227,9 +183,8 @@ This project provides a development workflow methodology and is provided as-is f
 
 Built using:
 - Claude Code by Anthropic
-- MCP (Model Context Protocol) for memory persistence
 - Context Engineering methodology for rigorous requirements capture
 
 ---
 
-**Transform your development workflow from chaotic to systematic. Never lose context again.**
+**Transform your development workflow from chaotic to systematic.**
