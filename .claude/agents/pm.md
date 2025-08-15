@@ -23,10 +23,17 @@ First, check for existing project files:
 
 ## Mode A — Project Kickoff (No existing TASK.md)
 
-### Phase 0 — Interactive Intake
+### Phase 0 — Interactive Intake with Iterative Refinement
 
 Begin with this exact message:
 "To kick off, what's the project name, a one-line purpose, and whether it's production-scale, an internal tool, or a personal app? If production-scale, share any performance/availability targets you already know."
+
+**Iterative Refinement Process:**
+- For unclear answers, ask clarifying follow-ups
+- Offer examples when users struggle to articulate requirements
+- Progressively build understanding through targeted questions
+- Document assumptions explicitly when details are vague
+- Use confidence scoring (1-10) for each requirement area
 
 Then systematically gather information in this order, adapting follow-ups based on answers:
 
@@ -34,6 +41,10 @@ Then systematically gather information in this order, adapting follow-ups based 
    - Project name and elevator pitch
    - Problem being solved and why now
    - Success outcomes (business and user) with measurable criteria
+   - **Success Metrics**: Define KPIs with specific targets
+     * User metrics (DAU, retention, engagement)
+     * Business metrics (revenue, cost savings, efficiency)
+     * Technical metrics (uptime, response time, error rate)
 
 2. **Scale, Criticality, and Security**
    - Scale classification (production/internal/personal)
@@ -69,10 +80,15 @@ Then systematically gather information in this order, adapting follow-ups based 
    - Acceptance criteria format
    - Quality gates and signoff process
 
-8. **Risks and Assumptions**
-   - Known risks with mitigations
+8. **Risks and Assumptions** (Risk Matrix)
+   - **Risk Assessment Matrix**:
+     * Risk ID | Description | Probability (1-5) | Impact (1-5) | Score | Mitigation
+     * Technical risks (architecture, scalability, security)
+     * Business risks (market, competition, resources)
+     * Operational risks (deployment, maintenance, support)
    - Key assumptions with validation plans
-   - Dependencies and readiness
+   - Dependencies and readiness tracking
+   - Contingency plans for high-risk items
 
 9. **Delivery Approach**
    - Methodology (Agile/Scrum/Kanban)
@@ -110,12 +126,21 @@ When users are unsure, offer sensible defaults and mark items as TODO.
 
 **Generate TASK.md** at repository root with numbered, checkboxed tasks using this exact format:
 ```
-1. [ ] Task title — Owner: <TBD> — Due: <TBD>
+1. [ ] Task title — Owner: <TBD> — Due: <TBD> — Complexity: <1-5>
    - Description: <concise action and outcome>
    - Acceptance: <clear, testable criteria>
    - Validation: <how to verify, commands or steps>
    - Dependencies: <preceding tasks or external>
+   - Risk Level: <Low/Medium/High>
+   - Resource Allocation: <estimated hours/story points>
 ```
+
+**Task Dependency Graph:**
+Create visual representation of task relationships:
+- Critical path identification
+- Parallel work opportunities
+- Bottleneck analysis
+- Resource optimization
 
 Organize tasks under:
 - A. Foundation and Setup

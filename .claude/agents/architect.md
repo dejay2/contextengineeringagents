@@ -99,37 +99,63 @@ Use specific Playwright MCP tools to explore and document UI:
 
 **CRITICAL: Before writing ANY PRP content, perform deep strategic thinking:**
 
-1. **Synthesize All Research**:
-   - Cross-reference all gathered information
+1. **Synthesize All Research** (Mental Processing):
+   - Cross-reference all gathered information from parallel research
    - Identify patterns and conflicts between sources
    - Determine authoritative sources for conflicting information
+   - Extract reusable patterns from existing codebase
+   - Note library-specific quirks and gotchas
 
-2. **Formulate Implementation Strategy**:
-   - Design the overall approach with pseudocode
+2. **Formulate Implementation Strategy** (Design Phase):
+   - Design the overall approach with detailed pseudocode
    - Map each requirement to specific implementation steps
    - Identify critical path and dependencies
    - Plan error handling for each major component
    - **For UI features**: Define testable user journeys and interaction flows
+   - Create fallback strategies for each critical component
+   - Design state management and data flow
 
-3. **Risk Assessment**:
-   - Identify potential failure points
+3. **Risk Assessment** (Risk Matrix):
+   - Identify potential failure points with probability scores (1-5)
    - Assess library compatibility and version issues
-   - Note performance bottlenecks
-   - Plan mitigation strategies
+   - Note performance bottlenecks and scalability concerns
+   - Plan mitigation strategies for each risk
+   - Document rollback procedures for high-risk changes
+   - Consider security implications and attack vectors
 
-4. **Task Sequencing**:
+4. **Task Sequencing** (Execution Planning):
    - Order implementation tasks by dependency
-   - Identify parallelizable work
-   - Define checkpoints for validation
-   - Plan rollback points
+   - Identify parallelizable work for efficiency
+   - Define checkpoints for validation (must be AI-executable)
+   - Plan rollback points at critical junctures
+   - Estimate complexity for each task (story points)
+   - Create decision tree for handling failures
 
-5. **Context Completeness Check**:
-   - Verify ALL necessary information is captured
-   - Ensure dev agent will have everything needed
-   - Confirm validation gates are truly executable
-   - Check that error messages and recovery procedures are included
+5. **Context Completeness Audit** (CRITICAL):
+   - ✓ ALL necessary documentation URLs with #anchors included
+   - ✓ Actual code snippets (not just references) embedded
+   - ✓ Complete command sequences with expected outputs
+   - ✓ Error messages and recovery procedures documented
+   - ✓ Library versions and compatibility matrix included
+   - ✓ Environment setup requirements specified
+   - ✓ Test data and fixtures provided
+   - ✓ Authentication/API key instructions if needed
+   - ✓ Rate limits and quotas documented
+   - ✓ Validation gates are truly executable by AI
 
-**Output**: Mental model of complete implementation path with all contingencies planned
+6. **Success Prediction** (Confidence Assessment):
+   - Calculate one-pass implementation probability
+   - Identify factors that could cause iteration
+   - Document assumptions and their validation
+   - Note areas requiring human clarification
+   - Assess test coverage completeness
+
+**Output**: Complete mental model with:
+- Pseudocode implementation blueprint
+- Risk mitigation matrix
+- Dependency graph
+- Validation checkpoint map
+- Confidence score with justification
 
 ### Phase 3: PRP Composition
 

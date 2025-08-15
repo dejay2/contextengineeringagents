@@ -18,6 +18,9 @@ Optionally note examples or docs as TODOs if tools are unavailable. Do not creat
 - Deterministic, testable output; avoid generic statements
 - Security first: never include secrets, credentials, PII, or tokens
 - Tool usage is optional. If Brave/Playwright/Context tools are not available, add TODOs using Todowrite tool; do not fail the run
+- **Parallel Research**: Launch multiple research tasks simultaneously when available
+- **Validation-First**: Define clear, executable validation gates for every requirement
+- **Confidence Scoring**: Assess and document completeness confidence (1-10 scale)
 
 ## File Naming and Selection
 
@@ -117,13 +120,26 @@ If tooling is unavailable, include TODOs and suggested official sources.
 
 **Risks and mitigations:**
 
-## VALIDATION
+## VALIDATION GATES
 
+**Executable Validation Commands:**
+- [ ] Lint check: `<command if applicable>`
+- [ ] Type check: `<command if applicable>`
+- [ ] Unit tests: `<test command>`
+- [ ] Integration tests: `<test command>`
+- [ ] E2E tests: `<test command if UI feature>`
+
+**Document Validation:**
 - [ ] features/<N>-<feature-slug>.md created or updated
-- [ ] Examples created only if explicitly requested
-- [ ] References captured (or TODOs added)
+- [ ] All acceptance criteria have testable validation steps
+- [ ] Research artifacts documented (or TODOs added)
 - [ ] No secrets/PII included
 - [ ] TASK.md parsed (or number inferred, if missing/malformed)
+
+**Confidence Score:** <1-10>/10
+- Requirements clarity: <score>
+- Research completeness: <score>
+- Validation coverage: <score>
 
 **Tool limitations noted:** <yes/no; brief note>
 
@@ -134,13 +150,27 @@ If tooling is unavailable, include TODOs and suggested official sources.
 
 ## Execution Steps
 
+### Phase 1: Context Loading & Analysis
 1. Determine feature name from user input; else infer; else "new-feature"
 2. Read TASK.md at repo root
 3. Parse tasks, find next unchecked "[ ]" entry, extract N; else infer N as per fallback
+
+### Phase 2: Parallel Research (if tools available)
+Launch simultaneously:
+- **WebSearch/Brave Search**: Official docs, best practices, security considerations
+- **Context7**: Library documentation, API references
+- **Codebase Analysis**: Grep for similar patterns, existing implementations
+
+### Phase 3: Feature Document Creation
 4. Slugify the feature name; ensure features/ exists
-5. Create or update features/<N>-<feature-slug>.md with the template and current ISO8601 timestamp
-6. Do not create examples/ unless explicitly requested
-7. Return a concise summary: file path, whether created or updated, selected N, and any fallbacks used
+5. Create or update features/<N>-<feature-slug>.md with the enhanced template
+6. Include research artifacts and validation gates
+7. Calculate and document confidence score
+
+### Phase 4: Validation & Reporting
+8. Verify all validation gates are executable
+9. Do not create examples/ unless explicitly requested
+10. Return a concise summary: file path, confidence score, validation gates count, and any fallbacks used
 
 ## Execution Sequence
 
