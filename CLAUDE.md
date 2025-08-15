@@ -8,7 +8,8 @@ YOU MUST use the specialized agents in `.claude/agents/` for ALL major tasks:
 2. **Feature Documentation** → Use `analyst` agent to create features/*.md from TASK.md
 3. **Requirements Design** → Use `architect` agent to transform features/*.md → PRPs/*.md
 4. **Implementation** → Use `dev` agent to execute PRPs with validation
-5. **Bug Fixes** → Use `debugger` agent for single-pass debugging
+5. **Verification** → Use `verifier` agent to confirm implementation ACTUALLY WORKS
+6. **Bug Fixes** → Use `debugger` agent for single-pass debugging
 
 
 ### IMPORTANT: How Agents Work
@@ -79,7 +80,8 @@ YOU MUST maintain this exact directory structure:
 2. Check if features/<N>-*.md exists
 3. Check if PRPs/*.md exists
 4. Use appropriate agent based on what's missing
-5. Update TASK.md after completion
+5. After dev agent completes, invoke verifier agent
+6. Only update TASK.md after verifier confirms success
 
 ## Code Style and Quality
 

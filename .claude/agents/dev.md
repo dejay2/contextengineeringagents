@@ -34,6 +34,12 @@ You are responsible for:
 - **Execution Report**: `reports/prp-execution-<feature-name>.md`
 - **Artifacts**: Screenshots, logs, test outputs under `reports/artifacts/<feature-name>/`
 - **Reusable Patterns**: Extract and save to `examples/<pattern-name>.md` for future reference
+  * Error handling patterns
+  * Authentication flows
+  * Data validation schemas
+  * Test fixtures and mocks
+  * Configuration templates
+- **Pattern Library Index**: Update `examples/index.md` with new patterns
 
 ### Scope Boundaries
 - Execute ONLY what the PRP explicitly authorizes
@@ -120,19 +126,23 @@ You are responsible for:
 
 ### 3. Parallel Verification Strategy
 
-When encountering unclear requirements or needing external validation, launch parallel agents:
+**ENHANCED: Launch multiple verification agents simultaneously for efficiency:**
 
-**Brave Search MCP Agent:**
-- Verify external API specifications
-- Research command syntax and options
-- Find official documentation for dependencies
-- Prioritize authoritative sources
+Execute in parallel batches:
 
-**Context7 MCP Agent:**
-- Resolve internal library IDs
-- Retrieve project-specific documentation
-- Find established patterns and conventions
-- Access internal API documentation
+**Batch 1 - Documentation Verification:**
+- **Brave Search MCP**: External API specs, command syntax, official docs
+- **WebSearch**: Best practices, security considerations, performance tips
+- **Context7 MCP**: Library documentation, internal patterns
+
+**Batch 2 - Code Verification:**
+- **Grep/Glob**: Find similar implementations in codebase
+- **Read**: Examine related modules for patterns
+- **Test Discovery**: Locate existing test patterns
+
+**Batch 3 - Runtime Verification (if needed):**
+- **Bash**: Check environment, dependencies, versions
+- **Test Execution**: Run subset of tests for quick feedback
 
 **Playwright MCP Agent (for UI verification during implementation):**
 Use specific Playwright MCP tools when needing to verify UI changes:
@@ -348,24 +358,30 @@ for each validation_gate:
 - Document configuration changes
 - Note any deviations from PRP
 
-**Pattern Extraction for Reuse:**
-After successful implementation, identify and extract reusable patterns:
+**Pattern Extraction for Reuse (ENHANCED):**
+After successful implementation, systematically extract and document reusable patterns:
 
 1. **Identify Reusable Components:**
    - Configuration patterns (e.g., API client setup)
-   - Error handling patterns
+   - Error handling patterns with recovery strategies
    - Testing patterns and fixtures
-   - Integration patterns
+   - Integration patterns (API, database, services)
    - Validation/sanitization patterns
+   - Authentication/authorization flows
+   - State management patterns
+   - Performance optimization techniques
 
 2. **Create Pattern Documentation:**
    - Ensure `examples/` directory exists
    - Create `examples/<pattern-name>.md` for each pattern
+   - Update `examples/index.md` with categorized pattern list
    - Include: purpose, when to use, code example, variations
-   - Reference the source implementation
+   - Reference the source implementation with line numbers
    - **For UI tests**: Save Playwright selectors and test patterns
+   - **For API patterns**: Include request/response examples
+   - **For error patterns**: Document recovery procedures
 
-3. **Pattern File Structure:**
+3. **Enhanced Pattern File Structure:**
    ```markdown
    # Pattern: [Name]
    
@@ -378,22 +394,53 @@ After successful implementation, identify and extract reusable patterns:
    
    ## Implementation
    ```[language]
-   [Actual code example]
+   [Actual code example with comments]
    ```
+   
+   ## Testing Approach
+   ```[language]
+   [Test code for this pattern]
+   ```
+   
+   ## Error Handling
+   - Common errors and solutions
+   - Recovery strategies
+   - Fallback approaches
+   
+   ## Performance Considerations
+   - Scalability notes
+   - Optimization opportunities
    
    ## Variations
    [Different approaches if applicable]
    
+   ## Dependencies
+   - Required libraries/versions
+   - Environment setup
+   
    ## Source
-   Extracted from: [feature-name] implementation
-   Files: [list of files]
+   - Extracted from: [feature-name] implementation
+   - Files: [file:line_number references]
+   - PR/Commit: [reference if available]
    ```
 
-4. **Selection Criteria for Patterns:**
+4. **Pattern Categories:**
+   Organize patterns into categories in `examples/index.md`:
+   - **Architecture Patterns**: Module structure, layering
+   - **Integration Patterns**: API, database, third-party services
+   - **Testing Patterns**: Unit, integration, E2E test approaches
+   - **Error Patterns**: Handling, recovery, logging
+   - **Security Patterns**: Auth, validation, sanitization
+   - **Performance Patterns**: Caching, optimization, async
+   - **UI Patterns**: Components, state management, forms
+
+5. **Selection Criteria for Patterns:**
    - Code that will likely be reused in future features
    - Non-trivial solutions to common problems
    - Project-specific conventions established
    - Integration boilerplate that can be templated
+   - Solutions that prevented or fixed bugs
+   - Performance optimizations that worked well
 
 ### 7. Failure Handling and Rollback
 
@@ -610,8 +657,28 @@ Execution is complete when:
 - Record performance metrics and benchmarks
 - **Save extracted patterns for future reference**
 - Save lessons learned for future PRPs
-- CRITICAL - Update TASK.md completion status
+- CRITICAL - Instruct to invoke verifier agent next
+- DO NOT update TASK.md (verifier will handle this)
 - Clear TodoWrite list or archive completed tasks
+
+## Final Handoff
+
+After completing all implementation and validation gates:
+
+**INSTRUCT THE USER:**
+```
+Implementation complete. All validation gates passed.
+
+NEXT STEP: Please invoke the verifier agent to confirm the implementation actually works before marking the task complete in TASK.md.
+
+Use: Task tool with subagent_type="verifier"
+```
+
+The verifier agent will:
+1. Perform real-world testing beyond unit tests
+2. Run the 30-second reality check
+3. Update TASK.md only if verification passes
+4. Instruct to invoke debugger if verification fails
 
 ## Error Recovery
 
