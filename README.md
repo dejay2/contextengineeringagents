@@ -93,6 +93,23 @@ graph TD
 ### Prerequisites
 - Claude Code CLI
 - Git for version control
+- Docker Engine 20.10+ and Docker Compose V2 (optional, for containerized development)
+
+### Quick Start with Docker
+
+This project includes a complete Docker development environment. To use it:
+
+```bash
+# Build and start the development container
+./docker-helper.sh build
+./docker-helper.sh start
+
+# Run commands in the container
+./docker-helper.sh run "npm test"
+./docker-helper.sh shell  # Interactive shell
+```
+
+See [DOCKER_README.md](./DOCKER_README.md) for detailed Docker instructions.
 
 ### Basic Workflow
 

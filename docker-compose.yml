@@ -1,0 +1,59 @@
+version: '3.8'
+
+# Project-specific name to avoid conflicts
+name: context-claude-dev
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: context-claude-code-dev
+    
+    # Keep container running
+    stdin_open: true
+    tty: true
+    
+    # Mount the entire project directory
+    volumes:
+      - .:/workspace
+      - node_modules:/workspace/node_modules
+      - pip_cache:/root/.cache/pip
+      - npm_cache:/root/.npm
+      - cargo_registry:/root/.cargo/registry
+      - go_cache:/go
+      
+    # Environment variables
+    environment:
+      - NODE_ENV=development
+      - TERM=xterm-256color
+      - COLORTERM=truecolor
+      
+    # Network settings
+    network_mode: host
+    
+    # Security options (allows debugging and system operations)
+    cap_add:
+      - SYS_PTRACE
+      - NET_ADMIN
+    security_opt:
+      - seccomp:unconfined
+      - apparmor:unconfined
+    
+    # Resource limits (optional, adjust as needed)
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '4'
+    #       memory: 8G
+    #     reservations:
+    #       cpus: '2'
+    #       memory: 4G
+
+# Named volumes for better performance
+volumes:
+  node_modules:
+  pip_cache:
+  npm_cache:
+  cargo_registry:
+  go_cache:

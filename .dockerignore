@@ -1,0 +1,62 @@
+# Git
+.git
+.gitignore
+
+# Node modules (we'll install fresh in container)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.venv/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+logs/
+
+# Environment files with secrets
+.env.local
+.env.*.local
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Docker files themselves
+Dockerfile
+docker-compose.yml
+docker-helper.sh
+.dockerignore
+
+# Reports (can be regenerated)
+reports/artifacts/
+reports/debug/
+
+# NOTE: We intentionally include .claude/ folder as it contains
+# important agent definitions and project configuration
