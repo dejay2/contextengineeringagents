@@ -131,16 +131,21 @@ When users are unsure, offer sensible defaults and mark items as TODO.
    - Acceptance: <clear, testable criteria>
    - Validation: <how to verify, commands or steps>
    - Dependencies: <preceding tasks or external>
+   - Agent: <pm|analyst|architect|dev-frontend|dev-backend|dev-api|dev-database|verifier|debugger>
+   - Parallel-Safe: <yes|no|after-task-N>
    - Risk Level: <Low/Medium/High>
    - Resource Allocation: <estimated hours/story points>
+   - Breaking-Change-Risk: <Low/Medium/High>
 ```
 
-**Task Dependency Graph:**
-Create visual representation of task relationships:
+**Task Dependency Graph and Parallel Execution Planning:**
+Create visual representation of task relationships and agent coordination:
 - Critical path identification
-- Parallel work opportunities
-- Bottleneck analysis
-- Resource optimization
+- Parallel work opportunities by agent specialization
+- Resource conflict detection (shared files, dependencies)
+- Agent load balancing and coordination
+- Breaking change risk assessment for parallel execution
+- Cross-domain integration points (frontend ↔ backend ↔ database)
 
 Organize tasks under:
 - A. Foundation and Setup
@@ -153,6 +158,33 @@ Organize tasks under:
 - H. Launch and Post-Launch
 
 Tasks should be atomic (0.5-2 days for MVP). Mark assumption-dependent tasks clearly.
+
+**Agent Assignment Strategy:**
+Assign the most appropriate specialized agent for each task:
+- **pm**: Project setup, requirement gathering, task management
+- **analyst**: Feature documentation, requirement analysis
+- **architect**: Technical design, PRP creation with validation gates
+- **dev-frontend**: UI components, client-side logic, responsive design
+- **dev-backend**: Server logic, business rules, authentication
+- **dev-api**: REST/GraphQL endpoints, API documentation
+- **dev-database**: Schema design, migrations, query optimization
+- **verifier**: Implementation verification, acceptance testing
+- **debugger**: Bug diagnosis and resolution
+
+**Parallel Execution Planning:**
+Mark tasks as parallel-safe when they:
+- Target different domains (frontend vs backend vs database)
+- Work on independent components/modules
+- Don't share configuration files or dependencies
+- Have Low breaking-change-risk
+
+Mark as "no" when tasks:
+- Share file dependencies
+- Require sequential schema/API changes
+- Have High breaking-change-risk
+- Need coordinated configuration changes
+
+Use "after-task-N" for conditional parallelism after dependencies are resolved.
 
 ### Phase 2.5 — Directory Structure Creation
 
@@ -238,6 +270,9 @@ N. [ ] Task title — Owner: <TBD> — Due: <TBD>
    - Acceptance: <clear, testable criteria>
    - Validation: <how to verify, commands or steps>
    - Dependencies: <task numbers or external>
+   - Agent: <pm|analyst|architect|dev-frontend|dev-backend|dev-api|dev-database|verifier|debugger>
+   - Parallel-Safe: <yes|no|after-task-N>
+   - Breaking-Change-Risk: <Low/Medium/High>
 ```
 
 ### Phase 4 — Validation
