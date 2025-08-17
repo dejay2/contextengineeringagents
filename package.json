@@ -1,0 +1,32 @@
+{
+  "name": "context",
+  "version": "1.0.0",
+  "description": "A sophisticated multi-agent development workflow that enforces rigorous requirements capture, prevents context loss, and maintains code quality through automated validation gates.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "tests"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest",
+    "test:unit": "jest --testPathPattern=unit",
+    "test:integration": "jest --testPathPattern=integration",
+    "test:e2e": "jest --testPathPattern=e2e",
+    "lint": "echo 'No linter configured yet'",
+    "start": "node src/cli-adder.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dejay2/contextengineeringagents.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dejay2/contextengineeringagents/issues"
+  },
+  "homepage": "https://github.com/dejay2/contextengineeringagents#readme"
+}
